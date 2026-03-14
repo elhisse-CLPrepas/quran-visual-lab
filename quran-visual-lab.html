@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées essentielles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Titre principal pour le SEO et l'affichage -->
+    <title>Quran Visual Lab · Laboratoire visuel et pédagogique du Coran | CTM</title>
+
+    <!-- Métadonnées SEO (Search Engine Optimization) -->
+    <meta name="description" content="Découvrez Quran Visual Lab, le générateur intelligent de visuels coraniques et d'outils d'apprentissage développé par le Club Tiriens Maroc (CTM). Une révolution pour l'étude, la méditation et le partage des versets.">
+    <meta name="keywords" content="Coran, apprentissage, mémorisation, infographie islamique, outil pédagogique, CTM, Club Tiriens Maroc, générateur de prompt, verset, sourate, Islam, technologie, IA">
+    <meta name="author" content="Club Tiriens Maroc (CTM)">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / LinkedIn / Facebook (améliore le partage) -->
+    <meta property="og:title" content="Quran Visual Lab – Outil d'apprentissage intelligent du Coran">
+    <meta property="og:description" content="Créez instantanément des visuels spirituels et des fiches pédagogiques à partir d’un verset. Un projet innovant du CTM.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://clprepas.com/Blog/ctm-quran-vl">
+    <!-- Idéalement, ajoutez ici une image de preview : <meta property="og:image" content="URL_DE_VOTRE_IMAGE"> -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quran Visual Lab – Laboratoire visuel du Coran">
+    <meta name="twitter:description" content="Saisissez un verset, obtenez un prompt professionnel et un visuel spirituel. Projet du Club Tiriens Maroc.">
+
+    <!-- Bootstrap 5.3 (CDN) avec sa feuille de style – indispensable pour la mise en page professionnelle -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Google Fonts pour une typographie élégante (optionnel mais recommandé) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (gratuit) pour les icônes (optionnel mais améliore l'UI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Styles personnalisés pour la palette claire/contrastée et l'identité CTM -->
+    <style>
+        /* Pallette de couleurs claires et contrastées inspirée du document */
+        :root {
+            --ctm-bg-light: #f8f5f0;      /* Beige très clair, fond apaisant */
+            --ctm-primary: #1a3b5d;        /* Bleu nuit profond, pour les titres et accents */
+            --ctm-gold: #b38b5b;           /* Doré chaud pour les touches d'élégance */
+            --ctm-emerald: #2d6a4f;         /* Vert émeraude pour les succès/boutons */
+            --ctm-dark-bg: #ffffff;         /* Fond blanc pour les cartes */
+            --ctm-text: #1e2a3a;            /* Texte principal foncé */
+            --ctm-border: #e9dfd3;           /* Bordures douces */
+        }
+
+        body {
+            background-color: var(--ctm-bg-light);
+            font-family: 'Inter', sans-serif;
+            color: var(--ctm-text);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, .logo-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--ctm-primary);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            border-left: 5px solid var(--ctm-gold);
+            padding-left: 1.2rem;
+            margin: 2rem 0 1.5rem 0;
+            font-size: 2rem;
+        }
+
+        .card {
+            border: 1px solid var(--ctm-border);
+            border-radius: 20px;
+            background-color: var(--ctm-dark-bg);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(26, 59, 93, 0.1);
+        }
+
+        .badge-ctm {
+            background-color: var(--ctm-emerald);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .btn-ctm-primary {
+            background-color: var(--ctm-primary);
+            border-color: var(--ctm-primary);
+            color: white;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-ctm-primary:hover {
+            background-color: #0f2a42;
+            border-color: #0f2a42;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .btn-ctm-outline {
+            background-color: transparent;
+            border: 2px solid var(--ctm-gold);
+            color: var(--ctm-primary);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .btn-ctm-outline:hover {
+            background-color: var(--ctm-gold);
+            color: white;
+        }
+
+        .visual-palette-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 8px;
+            display: inline-block;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .dot-blue { background-color: var(--ctm-primary); }
+        .dot-gold { background-color: var(--ctm-gold); }
+        .dot-beige { background-color: #f1e9da; }
+        .dot-emerald { background-color: var(--ctm-emerald); }
+
+        footer a {
+            color: var(--ctm-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: var(--ctm-primary);
+            text-decoration: underline;
+        }
+
+        /* Citation de l'éditorial */
+        .peace-quote {
+            background: linear-gradient(135deg, #ffffff 0%, #faf6f0 100%);
+            border-radius: 50px 50px 50px 0;
+            padding: 1.5rem 2rem;
+            font-size: 1.25rem;
+            border-left: 5px solid var(--ctm-gold);
+            font-style: italic;
+            color: var(--ctm-primary);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header avec Logo CTM et navigation symbolique -->
+<nav class="navbar navbar-expand-lg bg-white py-3 border-bottom">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <!-- Logo CTM (badge stylisé) – à remplacer par une image si disponible -->
+            <span class="badge-ctm me-2"><i class="fas fa-moon me-1"></i>CTM</span>
+            <span class="logo-font fs-4" style="color: var(--ctm-primary);">Quran Visual Lab</span>
+        </a>
+        <div class="ms-auto d-flex gap-2">
+            <a href="https://alquran.cloud/" target="_blank" class="btn btn-sm btn-ctm-outline"><i class="fas fa-external-link-alt me-1"></i>AlQuran Cloud</a>
+            <a href="https://quran.com/" target="_blank" class="btn btn-sm btn-ctm-outline"><i class="fas fa-book-open me-1"></i>Quran.com</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Conteneur principal -->
+<main class="container my-5">
+
+    <!-- Introduction : Titre, sous-titre et citation "paix durable" -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto text-center">
+            <span class="badge-ctm mb-3 d-inline-block"><i class="fas fa-robot me-2"></i>Laboratoire d'IA & Spiritualité</span>
+            <h1 class="display-4 fw-bold mb-3">Quran Visual Lab</h1>
+            <p class="lead fs-3 text-muted">Générateur intelligent de visuels coraniques et d'outils d'apprentissage</p>
+            <div class="peace-quote mt-4 w-75 mx-auto">
+                <i class="fas fa-quote-left me-2" style="color: var(--ctm-gold);"></i>
+                La paix durable ne se décrète pas. Elle se construit d'abord dans la conscience.
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. Vision du projet -->
+    <section class="row mb-5">
+        <div class="col-12">
+            <h2><i class="fas fa-eye me-3" style="color: var(--ctm-gold);"></i>Vision du projet</h2>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card p-4">
+                <p class="fs-5">Créer une application web qui permet :</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: var(--ctm-emerald);"></i>Accéder rapidement à un <strong>verset du Coran</strong></li>
+                    <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: var(--ctm-emerald);"></i>Générer automatiquement un <strong>prompt visuel professionnel</strong></li>
+                    <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: var(--ctm-emerald);"></i>Produire des <strong>illustrations infographiques spirituelles</strong></li>
+                    <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: var(--ctm-emerald);"></i>Aider à <strong>l’apprentissage et la mémorisation</strong> du Coran</li>
+                    <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: var(--ctm-emerald);"></i>Faciliter la <strong>publication pédagogique et spirituelle</strong></li>
+                </ul>
+                <p class="mt-3 mb-0">L'utilisateur saisit simplement : <span class="badge bg-light text-dark">sourate</span> + <span class="badge bg-light text-dark">verset</span>. L'application se charge du reste.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card p-4 bg-soft d-flex flex-column justify-content-center" style="background: #fffaf5;">
+                <span class="fs-1 mb-2">✨</span>
+                <h4 class="fw-bold">Flux simplifié</h4>
+                <p class="mb-0"><strong>Utilisateur → saisie S+V → récupération verset → génération Prompt Maître → génération visuel → export.</strong></p>
+                <hr class="my-3">
+                <p class="small text-muted mb-0">Objectif : supprimer le copier-coller et standardiser la création de visuels.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Objectifs principaux + Utilisateurs cibles (fusionnés pour concision) -->
+    <section class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-copy fa-2x" style="color: var(--ctm-gold);"></i>
+                <h5 class="mt-3">Objectif 1</h5>
+                <p>Supprimer le copier-coller du texte coranique.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-magic fa-2x" style="color: var(--ctm-gold);"></i>
+                <h5 class="mt-3">Objectif 2</h5>
+                <p>Créer automatiquement un prompt maître standardisé.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-palette fa-2x" style="color: var(--ctm-gold);"></i>
+                <h5 class="mt-3">Objectif 3</h5>
+                <p>Générer des visuels pédagogiques et spirituels.</p>
+            </div>
+        </div>
+        <div class="col-md-12 mt-4">
+            <div class="card p-4">
+                <h4>👥 Utilisateurs cibles</h4>
+                <div class="row">
+                    <div class="col-sm-3"><span class="badge-ctm w-100">Enseignants</span></div>
+                    <div class="col-sm-3"><span class="badge-ctm w-100">Étudiants</span></div>
+                    <div class="col-sm-3"><span class="badge-ctm w-100">Créateurs de contenu</span></div>
+                    <div class="col-sm-3"><span class="badge-ctm w-100">Communauté CTM</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Interface & modules (récupération, prompts, visuel, apprentissage) -->
+    <section class="row mb-5">
+        <div class="col-12">
+            <h2><i class="fas fa-paint-brush me-3" style="color: var(--ctm-gold);"></i>Modules & génération automatique</h2>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card p-4">
+                <h4>🖼️ Module visuel & prompt</h4>
+                <p>Une fois le verset récupéré, l'application génère :</p>
+                <ul>
+                    <li><strong>Prompt visuel</strong> pour générateur d'image.</li>
+                    <li><strong>Prompt pédagogique</strong> pour fiche d'apprentissage.</li>
+                    <li><strong>Prompt publication</strong> pour blog ou WhatsApp.</li>
+                </ul>
+                <p><strong>Carte visuelle spirituelle :</strong> Titre, nom sourate, bloc verset, décor motifs islamiques, lumière, mosquée, calligraphie.</p>
+                <div class="d-flex align-items-center mt-2">
+                    <span class="me-2">Palette :</span>
+                    <span class="visual-palette-dot dot-blue"></span>
+                    <span class="visual-palette-dot dot-gold"></span>
+                    <span class="visual-palette-dot dot-beige"></span>
+                    <span class="visual-palette-dot dot-emerald"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card p-4">
+                <h4>📚 Module apprentissage & méditation</h4>
+                <p><strong>Lecture</strong> – affichage clair · <strong>Écoute</strong> – audio du verset · <strong>Répétition</strong> 3 fois · <strong>Mémorisation</strong> (masquer mots, quiz).</p>
+                <p><strong>Méditation :</strong> thème du verset, leçon spirituelle, question de réflexion.</p>
+                <p class="mt-2"><i class="fas fa-share-alt me-2"></i>Export : copier verset, télécharger prompt/fiche/image, partager WhatsApp/FB/Insta.</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card p-4">
+                <h5>📐 Formats visuels disponibles</h5>
+                <span class="badge bg-light text-dark me-2">1080×1920</span>
+                <span class="badge bg-light text-dark me-2">1080×1080</span>
+                <span class="badge bg-light text-dark">A4 pédagogique</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Architecture technique, vérification, données et roadmap -->
+    <section class="row mb-5">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h4>⚙️ Architecture technique</h4>
+                <p><strong>Front-end :</strong> HTML, CSS, JavaScript, Bootstrap.</p>
+                <p><strong>Back-end :</strong> Option simple (API Coran) ou avancée (Node.js/PHP avec cache).</p>
+                <p><strong>Source des données :</strong> API coranique (ex. AlQuran.cloud) pour récupérer nom sourate, texte arabe, traduction.</p>
+                <p><strong>Vérification :</strong> validation sourate/verset + message d'erreur clair.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h4>🚀 Améliorations futures</h4>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-sun me-2" style="color: var(--ctm-gold);"></i> Mode Verset du Jour</li>
+                    <li><i class="fas fa-layer-group me-2" style="color: var(--ctm-gold);"></i> Série pédagogique par thème</li>
+                    <li><i class="fas fa-history me-2" style="color: var(--ctm-gold);"></i> Suivi mémorisation & tableau de bord</li>
+                </ul>
+                <hr>
+                <h5>Tableau de bord utilisateur</h5>
+                <p>Suivi : versets consultés, mémorisés, temps d'étude.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Sécurité, MVP, version avancée et potentiel pédagogique -->
+    <section class="row mb-5">
+        <div class="col-lg-4">
+            <div class="card p-4 border-warning">
+                <h4>🔒 Sécurité & respect</h4>
+                <p>Texte coranique exact, aucune modification, sources fiables.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card p-4">
+                <h4>📦 MVP (démarrage rapide)</h4>
+                <p>Saisie sourate/verset, affichage, génération prompt, export texte.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card p-4">
+                <h4>🚀 Version avancée</h4>
+                <p>Visuels, audio, quiz, partage social, suivi apprentissage.</p>
+            </div>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="card p-4 text-center" style="background: var(--ctm-primary); color: white;">
+                <h3 class="text-white">Potentiel pédagogique</h3>
+                <p class="fs-5">Cette application peut devenir un <strong>outil moderne d'étude du Coran</strong> pour enseignants, étudiants et communautés.</p>
+                <p>Professeur, votre idée peut devenir un très beau projet éducatif et spirituel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liens utiles et ressources supplémentaires (GitHub, etc.) -->
+    <section class="row">
+        <div class="col-12">
+            <div class="card p-4 bg-white">
+                <h3><i class="fas fa-link me-2"></i>Ressources & liens utiles</h3>
+                <div class="d-flex flex-wrap gap-3 mt-3">
+                    <a href="https://alquran.cloud/" target="_blank" class="btn-ctm-outline btn">🔗 AlQuran.cloud (API)</a>
+                    <a href="https://quran.com/" target="_blank" class="btn-ctm-outline btn">📖 Quran.com</a>
+                    <a href="https://github.com/islamic-network" target="_blank" class="btn-ctm-outline btn"><i class="fab fa-github me-1"></i>Islamic Network (GitHub)</a>
+                </div>
+                <p class="mt-3 small text-muted">Explorez ces plateformes pour enrichir vos connaissances et contribuer au projet.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message de clôture / appel à l'action -->
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <hr class="w-25 mx-auto" style="border-color: var(--ctm-gold);">
+            <p class="fs-4 mt-3">📌 <strong>Quran Visual Lab</strong> – Laboratoire visuel et pédagogique du Coran. Porté par le Club Tiriens Maroc.</p>
+            <a href="#" class="btn-ctm-primary btn me-2"><i class="fas fa-download me-2"></i>Télécharger le concept (PDF)</a>
+            <a href="#" class="btn-ctm-outline btn"><i class="fas fa-envelope me-2"></i>Contacter l'équipe CTM</a>
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer avec copyright et mentions CTM -->
+<footer class="bg-white py-4 mt-5 border-top">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <span class="badge-ctm me-2"><i class="fas fa-moon"></i> CTM</span>
+            <span class="text-muted small">© 2025 Club Tiriens Maroc – Tous droits réservés. La paix se construit dans la conscience.</span>
+        </div>
+        <div class="mt-3 mt-md-0">
+            <a href="https://clprepas.com/Blog" class="text-decoration-none me-3">Blog</a>
+            <a href="#" class="text-decoration-none me-3">Confidentialité</a>
+            <a href="#" class="text-decoration-none">Méditation</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS (optionnel pour certains composants, mais inclus par précaution) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- Pas de JavaScript personnalisé nécessaire pour cette page statique -->
+</body>
+</html>
